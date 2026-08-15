@@ -230,3 +230,4 @@ supabase/
 - A `service_role key` só é usada em duas rotas server-side (`/api/mercadopago/webhook`) — nunca no navegador.
 - Senhas e sessões são geridas inteiramente pelo Supabase Auth.
 - `/admin` é protegido em duas camadas: middleware (server-side, redireciona quem não é admin) e RLS (mesmo que alguém burle o middleware, o banco recusa escrita sem `is_admin = true`).
+  V
