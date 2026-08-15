@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --champagne: #f5ebdd;
+  --champagne-soft: #f2e7d8;
+  --marsala: #6a1e32;
+  --marsala-dark: #4e1626;
+  --gold: #c8a15a;
+  --ink: #2e2e2e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--champagne);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.gold-rule {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 20px auto;
+}
+
+.btn-primary {
+  background: var(--marsala);
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  display: inline-block;
+  transition: all 0.35s ease;
+}
+.btn-primary:hover {
+  background: var(--gold);
+  color: var(--marsala-dark);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  border: 1px solid var(--marsala-dark);
+  color: var(--marsala-dark);
+  padding: 11px 27px;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  display: inline-block;
+  transition: all 0.35s ease;
+  background: transparent;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--marsala-dark);
+}
+
+.input-field {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 0.9rem;
+  padding: 13px 16px;
+  border: 1px solid rgba(78, 22, 38, 0.2);
+  background: #fff;
+  border-radius: 2px;
+  color: var(--ink);
+  width: 100%;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.label-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--marsala-dark);
+}
