@@ -1,37 +1,35 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/server';
-import ProductGrid from '@/components/ProductGrid';
-import CollectionCard from '@/components/CollectionCard';
+import MysteryBox from '@/components/MysteryBox';
+import CollectionsShowcase from '@/components/CollectionsShowcase';
+import Differentials from '@/components/Differentials';
+import Testimonials from '@/components/Testimonials';
 import Newsletter from '@/components/Newsletter';
-import type { Product, Collection, Banner } from '@/types/database';
+import ContactSection from '@/components/ContactSection';
+import type { Product, Collection, Banner, Testimonial } from '@/types/database';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   const supabase = await createClient();
 
-  const [{ data: banner }, { data: featured }, { data: newArrivals }, { data: collections }] = await Promise.all([
+  const [{ data: banner }, { data: showcase }, { data: collections }, { data: testimonialData }] = await Promise.all([
     supabase.from('banners').select('*').eq('placement', 'home').eq('is_active', true).order('display_order').limit(1).maybeSingle(),
     supabase
       .from('products')
       .select('*, category:categories(*), collection:collections(*)')
       .eq('status', 'active')
-      .eq('is_featured', true)
-      .limit(6),
-    supabase
-      .from('products')
-      .select('*, category:categories(*), collection:collections(*)')
-      .eq('status', 'active')
-      .eq('is_new', true)
-      .limit(3),
+      .order('created_at', { ascending: false })
+      .limit(24),
     supabase.from('collections').select('*').eq('is_active', true).order('display_order').limit(6),
+    supabase.from('testimonials').select('*').eq('is_active', true).order('display_order').limit(10),
   ]);
 
   const heroBanner = banner as Banner | null;
-  const featuredProducts = (featured ?? []) as Product[];
-  const newProducts = (newArrivals ?? []) as Product[];
+  const showcaseProducts = (showcase ?? []) as Product[];
   const collectionList = (collections ?? []) as Collection[];
+  const testimonials = (testimonialData ?? []) as Testimonial[];
 
   return (
     <>
@@ -92,55 +90,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ---------- DESTAQUES ---------- */}
-      {featuredProducts.length > 0 && (
-        <section className="py-24 bg-champagne-soft/50">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center max-w-xl mx-auto mb-14">
-              <p className="eyebrow">Destaques</p>
-              <h2 className="font-heading text-3xl md:text-4xl text-marsala-dark mt-3">Peças em Destaque</h2>
-              <div className="gold-rule" />
-            </div>
-            <ProductGrid products={featuredProducts} />
-          </div>
-        </section>
-      )}
-
-      {/* ---------- NOVIDADES ---------- */}
-      {newProducts.length > 0 && (
-        <section className="py-24">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center max-w-xl mx-auto mb-14">
-              <p className="eyebrow">Novidades</p>
-              <h2 className="font-heading text-3xl md:text-4xl text-marsala-dark mt-3">Recém-Chegadas</h2>
-              <div className="gold-rule" />
-            </div>
-            <ProductGrid products={newProducts} />
-          </div>
-        </section>
-      )}
+      {/* ---------- CAIXA MISTERIOSA ---------- */}
+      <MysteryBox />
 
       {/* ---------- COLEÇÕES ---------- */}
-      {collectionList.length > 0 && (
-        <section className="py-24 bg-champagne-soft/50">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center max-w-xl mx-auto mb-14">
-              <p className="eyebrow">Coleções</p>
-              <h2 className="font-heading text-3xl md:text-4xl text-marsala-dark mt-3">Nossas Coleções</h2>
-              <div className="gold-rule" />
-              <p className="text-[#5c5450] text-sm mt-2">
-                Cada uma com sua própria assinatura, cor, caimento e luxo, todas com o mesmo padrão de exclusividade pra
-                você se sentir única.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              {collectionList.map((c) => (
-                <CollectionCard key={c.id} collection={c} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <CollectionsShowcase collections={collectionList} products={showcaseProducts} />
+
+      {/* ---------- DIFERENCIAIS ---------- */}
+      <Differentials />
+
+      {/* ---------- DEPOIMENTOS ---------- */}
+      <Testimonials testimonials={testimonials} />
 
       {/* ---------- INSTAGRAM ---------- */}
       <section className="py-24">
@@ -167,6 +127,9 @@ export default async function HomePage() {
       </section>
 
       <Newsletter />
+
+      {/* ---------- CONTATO ---------- */}
+      <ContactSection />
     </>
   );
 }
