@@ -162,6 +162,18 @@ export interface Banner {
   is_active: boolean;
 }
 
+export interface Testimonial {
+  id: string;
+  customer_name: string;
+  customer_location: string | null;
+  quote: string;
+  rating: number;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // Item do carrinho no cliente (localStorage / contexto React)
 export interface CartItem {
   productId: string;
