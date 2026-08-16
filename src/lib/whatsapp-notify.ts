@@ -8,7 +8,7 @@
  *   ZAPI_INSTANCE_ID        - ID da instância Z-API
  *   ZAPI_TOKEN              - token da instância Z-API
  *   ZAPI_CLIENT_TOKEN       - "client-token" de segurança da conta Z-API (opcional, mas recomendado)
- *   ADMIN_WHATSAPP_NUMBER   - número que deve receber os avisos, formato: 5551999999999 (só dígitos, com DDI 55 e DDD)
+ *   ADMIN_WHATSAPP_NUMBER   - número que deve receber os avisos, formato: 5551996767044 (só dígitos, com DDI 55 e DDD)
  *
  * Se qualquer variável estiver faltando, a função apenas loga um aviso e
  * não faz nada — assim nunca quebra o fluxo de pagamento por causa disso.
