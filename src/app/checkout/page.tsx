@@ -114,6 +114,7 @@ function CheckoutContent() {
     { id: 'entrega', label: '2. Entrega' },
     { id: 'pagamento', label: '3. Pagamento' },
     { id: 'revisao', label: '4. Revisão' },
+    ];
   
 
   return (
