@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/admin/clientes', label: 'Clientes', icon: '☺' },
   { href: '/admin/cupons', label: 'Cupons', icon: '⌗' },
   { href: '/admin/banners', label: 'Banners', icon: '▭' },
+  { href: '/admin/depoimentos', label: 'Depoimentos', icon: '❝' },
   { href: '/admin/estoque', label: 'Estoque', icon: '⚑' },
   { href: '/admin/configuracoes', label: 'Configurações', icon: '⚙' },
 ];
