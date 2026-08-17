@@ -50,7 +50,7 @@ export default async function HomePage() {
             Vetter Luxury
           </h1>
           <p className="font-heading italic text-marsala text-lg md:text-xl mb-4">
-            {heroBanner?.subtitle ?? 'Luxo, exclusividade e feminilidade em cada detalhe.'}
+            {heroBanner?.subtitle ?? 'Lingerie de luxo, exclusividade e feminilidade em cada detalhe.'}
           </p>
           <p className="text-[#5c4f47] text-sm max-w-md mx-auto mb-10">
             Descubra coleções exclusivas criadas para mulheres que desejam sentir-se únicas, confiantes e sofisticadas.
@@ -59,6 +59,7 @@ export default async function HomePage() {
             <Link href="/produtos" className="btn-primary">Conheça a Coleção</Link>
             <Link href="/produtos?destaque=caixa-misteriosa" className="btn-outline border-marsala-dark text-marsala-dark">
               Caixa Misteriosa
+              
             </Link>
           </div>
         </div>
@@ -76,11 +77,11 @@ export default async function HomePage() {
           <div>
             <p className="eyebrow">A Marca</p>
             <h2 className="font-heading text-3xl md:text-4xl text-marsala-dark leading-tight mt-3">
-              Muito além de<br />uma lingerie.
+              Muito além de<br />uma lingerie de luxo.
             </h2>
             <div className="gold-rule !mx-0" />
             <p className="text-[#4a4340] text-[0.96rem] mb-3.5 max-w-md">
-              Na Vetter Luxury acreditamos que vestir-se bem começa pela lingerie. Cada peça é cuidadosamente selecionada
+              Na Vetter Luxury acreditamos que vestir-se bem começa pela lingerie de luxo. Cada peça de lingerie é cuidadosamente selecionada
               para proporcionar elegância, conforto, sensualidade e autoestima.
             </p>
             <p className="text-[#4a4340] text-[0.96rem] max-w-md">
