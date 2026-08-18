@@ -44,6 +44,7 @@ export default function Footer() {
         </div>
 
         <p className="text-xs text-champagne/45">&copy; {new Date().getFullYear()} Vetter Luxury. Todos os direitos reservados.</p>
+        <p className="text-xs text-champagne/30 mt-2">Criado por Karine Vetter</p>
       </div>
     </footer>
   );
