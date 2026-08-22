@@ -111,3 +111,11 @@ body {
   text-transform: uppercase;
   color: var(--marsala-dark);
 }
+/* Cursor personalizado: cereja do logo no lugar da setinha padrão */
+html, body {
+  cursor: url('/cursor-cherry.png') 4 2, auto;
+}
+
+a, button, [role="button"], input[type="submit"], .cursor-pointer {
+  cursor: url('/cursor-cherry.png') 4 2, pointer;
+}
