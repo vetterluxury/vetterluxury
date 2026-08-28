@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Cinzel, Playfair_Display, Cormorant_Garamond, Montserrat } from 'next/font/google';
 import './globals.css';
-import AnnouncementBar from '@/components/AnnouncementBar';
+import TabAttention from '@/components/TabAttention';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${cinzel.variable} ${playfair.variable} ${cormorant.variable} ${montserrat.variable}`}>
       <body className="font-body font-light text-ink bg-champagne">
-        <AnnouncementBar />
+        <TabAttention />
         <Providers>
           <Header />
           <main>{children}</main>
