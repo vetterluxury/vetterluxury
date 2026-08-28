@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const MENSAGENS = ['VOLTE AQUI!', 'Vetter Luxury'];
+const MENSAGENS = ['Vetter Luxury'];
 const INTERVALO_MS = 2000; // tempo que cada mensagem fica visível
 const FADE_MS = 400; // duração do efeito de piscar (fade)
 
