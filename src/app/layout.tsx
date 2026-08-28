@@ -46,9 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${cinzel.variable} ${playfair.variable} ${cormorant.variable} ${montserrat.variable}`}>
       <body className="font-body font-light text-ink bg-champagne">
-                <AnnouncementBar />
-        <Providers>
-          <Header />
+        <AnnouncementBar />
         <Providers>
           <Header />
           <main>{children}</main>
