@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Cinzel, Playfair_Display, Cormorant_Garamond, Montserrat } from 'next/font/google';
 import './globals.css';
+import AnnouncementBar from '@/components/AnnouncementBar';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
