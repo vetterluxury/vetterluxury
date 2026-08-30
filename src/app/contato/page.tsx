@@ -1,29 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { whatsappLink } from '@/lib/utils';
 
 export default function ContatoPage() {
   const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
 
-    // Mensagens de contato são registradas em site_settings->contact_messages
-    // para não exigir uma tabela extra. Para grande volume, crie uma tabela dedicada.
-    const { data } = await supabase.from('site_settings').select('value').eq('key', 'contact_messages').single();
-    const current = Array.isArray(data?.value) ? data!.value : [];
-
-    const { error } = await supabase
-      .from('site_settings')
-      .upsert({ key: 'contact_messages', value: [...current, { ...form, sentAt: new Date().toISOString() }] });
-
-    setStatus(error ? 'error' : 'done');
-    if (!error) setForm({ nome: '', email: '', telefone: '', mensagem: '' });
+    try {
+      const res = await fetch('/api/contato', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('falha ao enviar');
+      setStatus('done');
+      setForm({ nome: '', email: '', telefone: '', mensagem: '' });
+    } catch {
+      setStatus('error');
+    }
   }
 
   return (
