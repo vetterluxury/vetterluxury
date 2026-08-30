@@ -15,6 +15,7 @@ const LINKS = [
   { href: '/admin/banners', label: 'Banners', icon: '▭' },
   { href: '/admin/depoimentos', label: 'Depoimentos', icon: '❝' },
   { href: '/admin/mensagens', label: 'Mensagens', icon: '✉' },
+  { href: '/admin/newsletter', label: 'Newsletter', icon: '✦' },
   { href: '/admin/estoque', label: 'Estoque', icon: '⚑' },
   { href: '/admin/configuracoes', label: 'Configurações', icon: '⚙' },
 ];
