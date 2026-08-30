@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { Search, Heart, User, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -47,7 +48,7 @@ export default function Header() {
 
   return (
     <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? 'bg-champagne/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'
       }`}
     >
@@ -78,23 +79,35 @@ export default function Header() {
         <div className="flex items-center gap-5">
           <button
             aria-label="Buscar"
+            title="Buscar"
             onClick={() => setSearchOpen((s) => !s)}
             className="text-marsala-dark hover:text-gold transition-colors"
           >
-            &#128269;
+            <Search size={19} strokeWidth={1.5} />
           </button>
-          <Link href={user ? '/favoritos' : '/login'} aria-label="Favoritos" className="text-marsala-dark hover:text-gold transition-colors">
-            &#9825;
+          <Link
+            href={user ? '/favoritos' : '/login'}
+            aria-label="Favoritos"
+            title="Favoritos"
+            className="text-marsala-dark hover:text-gold transition-colors"
+          >
+            <Heart size={19} strokeWidth={1.5} />
           </Link>
-          <Link href={user ? '/conta' : '/login'} aria-label="Minha conta" className="text-marsala-dark hover:text-gold transition-colors">
-            &#128100;
+          <Link
+            href={user ? '/conta' : '/login'}
+            aria-label="Minha conta"
+            title="Minha conta"
+            className="text-marsala-dark hover:text-gold transition-colors"
+          >
+            <User size={19} strokeWidth={1.5} />
           </Link>
           <button
             aria-label="Carrinho"
+            title="Carrinho"
             onClick={openCart}
             className="relative text-marsala-dark hover:text-gold transition-colors"
           >
-            &#128092;
+            <ShoppingBag size={19} strokeWidth={1.5} />
             {itemCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-marsala text-white text-[0.6rem] w-4 h-4 rounded-full flex items-center justify-center">
                 {itemCount}
