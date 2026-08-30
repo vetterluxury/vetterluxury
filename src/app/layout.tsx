@@ -30,11 +30,13 @@ export const metadata: Metadata = {
     siteName: 'Vetter Luxury',
     locale: 'pt_BR',
     type: 'website',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Vetter Luxury' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Vetter Luxury | Lingeries Exclusivas de Luxo',
     description: 'Luxo, exclusividade e feminilidade em cada detalhe.',
+    images: ['/og-image.jpg'],
   },
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
