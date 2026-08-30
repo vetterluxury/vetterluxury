@@ -14,9 +14,12 @@ function CheckoutContent() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const couponCode = searchParams.get('cupom') ?? undefined;
 
   const [step, setStep] = useState<Step>('endereco');
+  const [couponInput, setCouponInput] = useState(searchParams.get('cupom') ?? '');
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [couponError, setCouponError] = useState('');
+  const [applyingCoupon, setApplyingCoupon] = useState(false);
   const [address, setAddress] = useState({
     recipientName: '',
     street: '',
@@ -57,6 +60,37 @@ function CheckoutContent() {
     setStep('entrega');
   }
 
+  async function handleApplyCoupon() {
+    if (!couponInput.trim()) return;
+    setApplyingCoupon(true);
+    setCouponError('');
+    try {
+      const res = await fetch('/api/coupons/validar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: couponInput, subtotal }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCouponError(data.error || 'Não foi possível aplicar o cupom.');
+        setAppliedCoupon(null);
+      } else {
+        setAppliedCoupon({ code: data.code, discount: data.discount });
+        setCouponError('');
+      }
+    } catch {
+      setCouponError('Erro de conexão. Tente novamente.');
+    } finally {
+      setApplyingCoupon(false);
+    }
+  }
+
+  function handleRemoveCoupon() {
+    setAppliedCoupon(null);
+    setCouponInput('');
+    setCouponError('');
+  }
+
   async function handleConfirmOrder() {
     setSubmitting(true);
     setError('');
@@ -78,7 +112,7 @@ function CheckoutContent() {
           })),
           shippingAddress: address,
           paymentMethod,
-          couponCode,
+          couponCode: appliedCoupon?.code,
           shipping,
         }),
       });
@@ -234,9 +268,53 @@ function CheckoutContent() {
             </p>
           </div>
 
-          <div className="flex justify-between font-heading text-lg text-marsala-dark border-t border-marsala-dark/10 pt-4 mb-6">
-            <span>Total</span>
-            <span>{formatPrice(subtotal + shipping)}</span>
+          <div className="border-t border-marsala-dark/10 pt-4 mb-6">
+            <p className="text-xs uppercase tracking-wide text-ink/50 mb-2">Cupom de desconto</p>
+            {appliedCoupon ? (
+              <div className="flex items-center justify-between bg-champagne-soft rounded-sm px-4 py-3">
+                <span className="text-sm text-marsala-dark font-medium">
+                  {appliedCoupon.code} aplicado — -{formatPrice(appliedCoupon.discount)}
+                </span>
+                <button onClick={handleRemoveCoupon} className="text-xs text-marsala underline">
+                  Remover
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  className="input-field flex-1 uppercase"
+                  placeholder="Digite seu cupom"
+                  value={couponInput}
+                  onChange={(e) => setCouponInput(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyCoupon}
+                  disabled={applyingCoupon || !couponInput.trim()}
+                  className="btn-outline border-marsala-dark text-marsala-dark whitespace-nowrap"
+                >
+                  {applyingCoupon ? 'Aplicando...' : 'Aplicar'}
+                </button>
+              </div>
+            )}
+            {couponError && <p className="text-xs text-marsala mt-2">{couponError}</p>}
+          </div>
+
+          <div className="border-t border-marsala-dark/10 pt-4 mb-6 space-y-1.5">
+            <div className="flex justify-between text-sm text-ink/70">
+              <span>Subtotal</span>
+              <span>{formatPrice(subtotal)}</span>
+            </div>
+            {appliedCoupon && (
+              <div className="flex justify-between text-sm text-marsala">
+                <span>Desconto ({appliedCoupon.code})</span>
+                <span>-{formatPrice(appliedCoupon.discount)}</span>
+              </div>
+            )}
+            <div className="flex justify-between font-heading text-lg text-marsala-dark pt-2">
+              <span>Total</span>
+              <span>{formatPrice(subtotal - (appliedCoupon?.discount ?? 0) + shipping)}</span>
+            </div>
           </div>
 
           {error && <p className="text-sm text-marsala mb-4">{error}</p>}
