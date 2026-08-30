@@ -5,6 +5,7 @@ import MysteryBox from '@/components/MysteryBox';
 import CollectionsShowcase from '@/components/CollectionsShowcase';
 import Differentials from '@/components/Differentials';
 import Testimonials from '@/components/Testimonials';
+import InstagramFeed from '@/components/InstagramFeed';
 import Newsletter from '@/components/Newsletter';
 import ContactSection from '@/components/ContactSection';
 import type { Product, Collection, Banner, Testimonial } from '@/types/database';
@@ -104,28 +105,7 @@ export default async function HomePage() {
       <Testimonials testimonials={testimonials} />
 
       {/* ---------- INSTAGRAM ---------- */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="eyebrow">Instagram</p>
-          <h2 className="font-heading text-3xl text-marsala-dark mt-3">@vetterluxury</h2>
-          <div className="gold-rule" />
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3.5 mt-10">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-square bg-gradient-to-br from-champagne-soft to-[#e6d8c0] flex items-center justify-center text-marsala/30 text-xl">
-                &#10022;
-              </div>
-            ))}
-          </div>
-          <a
-            href="https://instagram.com/vetterluxury"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline border-marsala-dark text-marsala-dark inline-block mt-9"
-          >
-            Seguir no Instagram
-          </a>
-        </div>
-      </section>
+      <InstagramFeed />
 
       <Newsletter />
 
