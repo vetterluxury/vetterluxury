@@ -11,7 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 const NAV_LINKS = [
   { href: '/', label: 'Início' },
   { href: '/produtos', label: 'Coleções' },
-  { href: '/produtos?destaque=caixa-misteriosa', label: 'Caixa Misteriosa' },
+  { href: '/caixa-misteriosa', label: 'Caixa Misteriosa' },
   { href: '/#sobre', label: 'Sobre' },
   { href: '/contato', label: 'Contato' },
 ];
