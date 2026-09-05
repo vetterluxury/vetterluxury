@@ -115,11 +115,89 @@ export async function POST(request: Request) {
       raw_payload: payment as unknown as Record<string, unknown>,
     });
 
+    // Quando o pagamento é aprovado, avisa a loja por e-mail com os detalhes
+    // do pedido (produtos, tamanho, cor e observações do cliente).
+    if (mapped.payment_status === 'approved') {
+      await notifyOrderApproved(supabase, orderId);
+    }
+
     return NextResponse.json({ received: true });
   } catch (err) {
     console.error('Erro ao processar webhook do Mercado Pago:', err);
     // Retorna 200 mesmo em erro interno para evitar reenvio agressivo do MP;
     // o erro fica registrado no log do servidor (Vercel > Logs) para investigação.
     return NextResponse.json({ received: true });
+  }
+}
+
+const CONTACT_EMAIL_TO = process.env.CONTACT_EMAIL_TO || 'vetterluxury@gmail.com';
+
+/**
+ * Busca os itens do pedido aprovado e envia um e-mail pra loja com tudo
+ * que a cliente escolheu (produto, tamanho, cor) e as observações que ela
+ * escreveu no checkout. Nunca lança erro — se falhar, só loga, pra não
+ * derrubar a confirmação do pagamento por causa do e-mail.
+ */
+async function notifyOrderApproved(
+  supabase: ReturnType<typeof createAdminClient>,
+  orderId: string
+): Promise<void> {
+  if (!process.env.RESEND_API_KEY) return;
+
+  try {
+    const { data: order } = await supabase
+      .from('orders')
+      .select('order_number, total, shipping_address')
+      .eq('id', orderId)
+      .single();
+    if (!order) return;
+
+    const { data: items } = await supabase
+      .from('order_items')
+      .select('product_name, size, color, quantity, unit_price')
+      .eq('order_id', orderId);
+
+    const address = (order.shipping_address ?? {}) as Record<string, string>;
+
+    const itemsHtml = (items ?? [])
+      .map(
+        (item) =>
+          `<li>${item.quantity}x ${item.product_name}${item.size ? ` — Tamanho: ${item.size}` : ''}${
+            item.color ? ` — Cor: ${item.color}` : ''
+          } (R$ ${Number(item.unit_price).toFixed(2)} cada)</li>`
+      )
+      .join('');
+
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Vetter Luxury <onboarding@resend.dev>',
+        to: [CONTACT_EMAIL_TO],
+        subject: `Novo pedido pago — #${order.order_number}`,
+        html: `
+          <div style="font-family: sans-serif; color: #2E2E2E;">
+            <h2 style="color: #6A1E32;">Pedido #${order.order_number} — pagamento aprovado</h2>
+            <p><strong>Cliente:</strong> ${address.recipientName || 'não informado'}</p>
+            <p><strong>Total:</strong> R$ ${Number(order.total).toFixed(2)}</p>
+            <p><strong>Itens:</strong></p>
+            <ul>${itemsHtml}</ul>
+            <p><strong>Endereço:</strong> ${address.street || ''}, ${address.number || ''} — ${
+          address.neighborhood || ''
+        }, ${address.city || ''}/${address.state || ''}</p>
+            ${
+              address.notes
+                ? `<p><strong>Observações da cliente:</strong></p><p style="white-space: pre-wrap;">${address.notes}</p>`
+                : ''
+            }
+          </div>
+        `,
+      }),
+    });
+  } catch (err) {
+    console.error('Erro ao enviar e-mail de confirmação de pedido:', err);
   }
 }
