@@ -5,8 +5,10 @@
 :root {
   --champagne: #f5ebdd;
   --champagne-soft: #f2e7d8;
-  --marsala: #964f4c;
-  --marsala-dark: #703b39;
+  --marsala: #651c32;
+  --marsala-dark: #4a1222;
+  --marsala-medium: #7a2940;
+  --marsala-soft: #8e4055;
   --gold: #c8a15a;
   --ink: #2e2e2e;
 }
