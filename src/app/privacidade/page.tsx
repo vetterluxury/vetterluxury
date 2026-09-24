@@ -15,7 +15,7 @@ export default function PrivacidadePage() {
         <p>
           A Vetter Luxury respeita a privacidade de seus clientes e visitantes. Esta política explica quais dados
           coletamos, como usamos e como você pode exercer seus direitos, em conformidade com a Lei Geral de Proteção
-          de Dados (LGPD — Lei nº 13.709/2018).
+          de Dados (LGPD, Lei nº 13.709/2018).
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">1. Dados que coletamos</h2>
         <p>
@@ -29,8 +29,8 @@ export default function PrivacidadePage() {
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">3. Compartilhamento</h2>
         <p>
-          Compartilhamos dados estritamente necessários com processadores de pagamento (Mercado Pago) e transportadoras,
-          para viabilizar a compra e a entrega. Não vendemos seus dados a terceiros.
+          Compartilhamos dados estritamente necessários com processadores de pagamento (Mercado Pago) e
+          transportadoras, para viabilizar a compra e a entrega. Não vendemos seus dados a terceiros.
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">4. Seus direitos</h2>
         <p>
@@ -41,10 +41,6 @@ export default function PrivacidadePage() {
         <p>
           Adotamos medidas técnicas e organizacionais para proteger seus dados, incluindo criptografia em trânsito e
           controle de acesso por autenticação (Supabase Auth) com Row Level Security no banco de dados.
-        </p>
-        <p className="text-xs text-ink/50 pt-6">
-          Este texto é um modelo inicial e não substitui a orientação de um profissional jurídico. Recomendamos revisão
-          por um advogado antes da publicação definitiva.
         </p>
       </div>
     </div>
