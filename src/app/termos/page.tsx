@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'Termos de Uso' };
@@ -13,8 +14,8 @@ export default function TermosPage() {
 
       <div className="prose prose-sm max-w-none text-ink/80 space-y-5 leading-relaxed">
         <p>
-          Ao acessar e utilizar o site da Vetter Luxury, você concorda com os termos descritos abaixo. Recomendamos a
-          leitura completa antes de realizar uma compra.
+          Ao acessar e utilizar o site da Vetter Luxury, você concorda com os termos apresentados nesta página.
+          Recomendamos a leitura das informações antes de realizar uma compra.
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">1. Cadastro</h2>
         <p>
@@ -23,8 +24,8 @@ export default function TermosPage() {
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">2. Produtos e preços</h2>
         <p>
-          Preços, disponibilidade e descrições podem ser alterados sem aviso prévio. Reservamo-nos o direito de
-          corrigir eventuais erros de precificação antes da confirmação do pagamento.
+          Preços, disponibilidade e descrições podem ser alterados sem aviso prévio, respeitando as condições
+          aplicáveis à compra já realizada.
         </p>
         <h2 className="font-heading text-xl text-marsala-dark pt-4">3. Pagamento</h2>
         <p>
@@ -36,14 +37,13 @@ export default function TermosPage() {
           Os prazos de entrega são estimados no momento do checkout e podem variar conforme a transportadora e a
           região de destino.
         </p>
-        <h2 className="font-heading text-xl text-marsala-dark pt-4">5. Propriedade intelectual</h2>
+        <h2 className="font-heading text-xl text-marsala-dark pt-4">5. Trocas, devoluções e reembolsos</h2>
         <p>
-          Todo o conteúdo do site — textos, imagens, identidade visual e logotipo — pertence à Vetter Luxury e não pode
-          ser reproduzido sem autorização.
-        </p>
-        <p className="text-xs text-ink/50 pt-6">
-          Este texto é um modelo inicial e não substitui a orientação de um profissional jurídico. Recomendamos revisão
-          por um advogado antes da publicação definitiva.
+          As condições aplicáveis a trocas, devoluções e reembolsos estão descritas na página{' '}
+          <Link href="/trocas" className="underline decoration-gold underline-offset-2 hover:text-gold">
+            Trocas e Devoluções
+          </Link>{' '}
+          da Vetter Luxury.
         </p>
       </div>
     </div>
