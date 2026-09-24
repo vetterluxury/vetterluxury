@@ -62,6 +62,11 @@ body {
   .btn-primary:hover {
   background: var(--marsala-dark);
   color: #fff;
+    .btn-primary,
+.btn-primary *,
+.btn-primary span {
+  color: #fff !important;
+}
 }
   color: var(--marsala-dark);
 }
