@@ -28,6 +28,7 @@ export default function Footer() {
             <Link href="/privacidade" className="block text-sm text-champagne/75 mb-2.5 hover:text-gold transition-colors">Política de Privacidade</Link>
             <Link href="/termos" className="block text-sm text-champagne/75 mb-2.5 hover:text-gold transition-colors">Termos de Uso</Link>
             <Link href="/trocas" className="block text-sm text-champagne/75 mb-2.5 hover:text-gold transition-colors">Trocas e Devoluções</Link>
+            <Link href="/propriedade-intelectual" className="block text-sm text-champagne/75 mb-2.5 hover:text-gold transition-colors">Propriedade Intelectual</Link>
           </div>
           <div>
             <h4 className="text-gold text-[0.82rem] tracking-[0.1em] uppercase mb-4">Contato</h4>
