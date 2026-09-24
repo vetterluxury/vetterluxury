@@ -51,7 +51,7 @@ body {
 
 .btn-primary {
   background: var(--marsala);
-  color: #fff;
+  color: #fff !important;
   padding: 12px 28px;
   font-size: 0.74rem;
   letter-spacing: 0.14em;
@@ -59,8 +59,8 @@ body {
   font-weight: 500;
   border-radius: 2px;
   display: inline-block;
-  .btn-primary:hover {
-  background: var(--marsala-dark);
+  transition: all 0.35s ease;
+}
   color: #fff;
     .btn-primary,
 .btn-primary *,
@@ -87,10 +87,9 @@ body {
   background: transparent;
 }
 
-.btn-outline:hover {
-  border-color: var(--marsala);
-  background: var(--marsala);
-  color: #fff;
+.btn-primary:hover {
+  background: var(--marsala-dark);
+  color: #fff !important;
 }
   color: var(--marsala-dark);
 }
