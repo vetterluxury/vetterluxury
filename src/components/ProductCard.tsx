@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={product.name}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out will-change-transform"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -90,7 +90,7 @@ export default function ProductCard({ product }: { product: Product }) {
           href={whatsappLink(`Olá! Tenho interesse na peça "${product.name}" da Vetter Luxury.`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#25D366] text-white text-center text-[0.7rem] tracking-[0.08em] uppercase py-2.5 rounded-sm hover:brightness-110 transition"
+          className="bg-[#1E8E4E] text-white text-center text-[0.7rem] tracking-[0.08em] uppercase py-2.5 rounded-sm hover:brightness-110 transition"
         >
           Comprar pelo WhatsApp
         </a>
