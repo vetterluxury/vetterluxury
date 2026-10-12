@@ -100,7 +100,6 @@ export default function CaixaMisteriosaPage() {
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="hidden md:block absolute inset-[18px_-18px_-18px_18px] border border-gold -z-10 rounded-sm" />
 
             <div className="text-center md:text-left mt-10">
               <p className="eyebrow">Caixa Misteriosa Vetter Luxury</p>
