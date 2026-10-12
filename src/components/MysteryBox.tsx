@@ -19,7 +19,6 @@ export default function MysteryBox() {
               priority={false}
             />
           </div>
-          <div className="hidden md:block absolute inset-[18px_-18px_-18px_18px] border border-gold -z-10 rounded-sm" />
         </div>
 
         <div className="order-1 md:order-2 text-center md:text-left">
