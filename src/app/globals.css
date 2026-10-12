@@ -9,6 +9,9 @@
   --marsala-dark: #4a1222;
   --marsala-medium: #7a2940;
   --marsala-soft: #8e4055;
+  --ivory: #f4e8e1;
+  --champagne-deep: #ead8c6;
+  --rose-nude: #d8b1aa;
   --gold: #c8a15a;
   --ink: #2e2e2e;
 }
@@ -191,18 +194,82 @@ a.bg-marsala-dark * {
 }
 
 /* =========================================
-   CURSOR PERSONALIZADO
+   CURSOR PERSONALIZADO (cereja do logo)
+   24px, e 48px em telas de alta densidade (retina).
+   Só vale para dispositivos com mouse: em celular e tablet continua o toque normal.
+   Para mudar o tamanho: troque public/cursor-cherry-24.png e cursor-cherry-48.png
+   (o de 48 deve ter sempre o dobro do de 24). O "3 2" é o ponto exato do clique.
    ========================================= */
 
-html,
-body {
-  cursor: url('/cursor-cherry.png') 4 2, auto;
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body {
+    cursor: url('/cursor-cherry-24.png') 3 2, auto;
+    cursor: -webkit-image-set(url('/cursor-cherry-24.png') 1x, url('/cursor-cherry-48.png') 2x) 3 2, auto;
+    cursor: image-set(url('/cursor-cherry-24.png') 1x, url('/cursor-cherry-48.png') 2x) 3 2, auto;
+  }
+
+  a,
+  button,
+  [role='button'],
+  input[type='submit'],
+  .cursor-pointer {
+    cursor: url('/cursor-cherry-24.png') 3 2, pointer;
+    cursor: -webkit-image-set(url('/cursor-cherry-24.png') 1x, url('/cursor-cherry-48.png') 2x) 3 2, pointer;
+    cursor: image-set(url('/cursor-cherry-24.png') 1x, url('/cursor-cherry-48.png') 2x) 3 2, pointer;
+  }
 }
 
-a,
-button,
-[role="button"],
-input[type="submit"],
-.cursor-pointer {
-  cursor: url('/cursor-cherry.png') 4 2, pointer;
+/* =========================================
+   CEREJINHAS DECORATIVAS (ver src/components/CherryScatter.tsx)
+   ========================================= */
+
+.cherry-dot {
+  position: absolute;
+  background: url('/cherry-dot.png') center / contain no-repeat;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================================
+   BOTÃO CLARO: para fundos marsala escuros (ex.: "Quero receber")
+   ========================================= */
+
+.btn-light {
+  background: var(--ivory);
+  color: var(--marsala-dark);
+  padding: 12px 28px;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  display: inline-block;
+  transition: all 0.35s ease;
+}
+.btn-light:hover {
+  background: var(--gold);
+}
+.btn-light:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* exceção às regras de texto branco forçado dentro de fundos marsala */
+.bg-marsala .btn-light,
+.bg-marsala-dark .btn-light {
+  color: var(--marsala-dark) !important;
+}
+
+.bg-marsala-dark .btn-outline:hover,
+.bg-marsala .btn-outline:hover {
+  color: var(--marsala-dark) !important;
+}
+
+/* =========================================
+   FOCO VISÍVEL (navegação por teclado)
+   ========================================= */
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
