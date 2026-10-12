@@ -46,7 +46,7 @@ export default function Newsletter() {
             onChange={(e) => setEmail(e.target.value)}
             className="input-field sm:max-w-xs"
           />
-          <button type="submit" disabled={status === 'loading'} className="btn-primary whitespace-nowrap">
+          <button type="submit" disabled={status === 'loading'} className="btn-light whitespace-nowrap">
             {status === 'loading' ? 'Enviando...' : 'Quero receber'}
           </button>
         </form>
