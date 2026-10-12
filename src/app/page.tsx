@@ -98,7 +98,6 @@ export default async function HomePage() {
             <div className="aspect-[4/5] bg-champagne-soft rounded-sm flex items-center justify-center p-10">
               <Image src="/logo-vetter.png" alt="Vetter Luxury" width={400} height={400} className="object-contain w-full h-full" />
             </div>
-            <div className="hidden md:block absolute inset-[18px_-18px_-18px_18px] border border-gold -z-10 rounded-sm" />
           </div>
           <div>
             <p className="eyebrow">A Marca</p>
