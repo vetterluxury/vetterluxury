@@ -1,3 +1,5 @@
+import CherryScatter from '@/components/CherryScatter';
+
 const ITEMS = [
   {
     icon: (
@@ -52,8 +54,9 @@ const ITEMS = [
 
 export default function Differentials() {
   return (
-    <section className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden py-24">
+      <CherryScatter variant="diferenciais" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="text-center max-w-xl mx-auto mb-16">
           <p className="eyebrow">Diferenciais</p>
           <h2 className="font-heading text-3xl md:text-4xl text-marsala-dark mt-3">Por que Vetter Luxury</h2>
