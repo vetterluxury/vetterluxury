@@ -9,7 +9,10 @@ const config: Config = {
         champagne: {
           DEFAULT: '#F5EBDD',
           soft: '#F2E7D8',
+          deep: '#EAD8C6',
         },
+        ivory: '#F4E8E1',
+        rose: '#D8B1AA',
 
         marsala: {
           DEFAULT: '#651C32',
