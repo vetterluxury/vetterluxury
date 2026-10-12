@@ -1,17 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import CherryScatter from '@/components/CherryScatter';
 
 export default function MysteryBox() {
   return (
-    <section className="py-24 md:py-32 bg-champagne-soft/50">
-      <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+    <section className="relative overflow-hidden py-24 md:py-32 bg-champagne-soft/50">
+      <CherryScatter variant="caixa" />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
         <div className="relative order-2 md:order-1">
-          <div className="aspect-[4/5] rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(78,22,38,0.18)]">
+          <div className="aspect-[1024/934] rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(78,22,38,0.18)]">
             <Image
               src="/mystery-box.jpg"
               alt="Caixa Misteriosa Vetter Luxury"
-              width={800}
-              height={1000}
+              width={1024}
+              height={934}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover w-full h-full"
               priority={false}
             />
@@ -31,7 +34,7 @@ export default function MysteryBox() {
             Dentro da Caixa Misteriosa você encontrará uma lingerie totalmente exclusiva, cuidadosamente escolhida
             para surpreender você. Cada caixa é única e nunca haverá duas experiências iguais.
           </p>
-          <Link href="/produtos?destaque=caixa-misteriosa" className="btn-primary">
+          <Link href="/caixa-misteriosa" className="btn-primary">
             Quero Descobrir Meu Luxo
           </Link>
         </div>
