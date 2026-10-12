@@ -5,6 +5,7 @@ import TabAttention from '@/components/TabAttention';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import SocialButtons from '@/components/SocialButtons';
 import Providers from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
           <WhatsAppButton />
+          <SocialButtons />
         </Providers>
         <GoogleAnalytics />
       </body>
