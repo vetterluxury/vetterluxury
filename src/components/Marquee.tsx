@@ -44,7 +44,7 @@ function Grupo({ oculto = false }: { oculto?: boolean }) {
 export default function Marquee() {
   return (
     <section
-      aria-label= luxo, exclusividade, sensualidade, poder feminino, deslumbrante e envolvente"
+      aria-label="Vetter Luxury: luxo, exclusividade, sensualidade, poder feminino, deslumbrante e envolvente"
       className="bg-ivory border-y border-gold/40 py-5"
     >
       <div className="marquee">
