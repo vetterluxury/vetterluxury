@@ -7,6 +7,7 @@ import Differentials from '@/components/Differentials';
 import Testimonials from '@/components/Testimonials';
 import InstagramFeed from '@/components/InstagramFeed';
 import CherryScatter from '@/components/CherryScatter';
+import Marquee from '@/components/Marquee';
 import VideoShowcase, { HeroVideoBackground } from '@/components/VideoShowcase';
 import { HERO_VIDEO } from '@/config/videos';
 import Newsletter from '@/components/Newsletter';
@@ -68,7 +69,7 @@ export default async function HomePage() {
         )}
         <div className="relative z-10 max-w-3xl px-6">
           <p className="eyebrow">Vetter Luxury</p>
-          <h1 className="font-display font-normal text-[clamp(3.4rem,9vw,6.4rem)] text-marsala-dark leading-none mt-4 mb-2">
+          <h1 className="font-brand font-normal text-[clamp(3.4rem,9vw,6.4rem)] text-marsala-dark leading-none mt-4 mb-2">
             Vetter Luxury
           </h1>
           <p className="font-heading italic text-marsala text-lg md:text-xl mb-4">
@@ -89,6 +90,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ---------- LETREIRO EM MOVIMENTO ---------- */}
+      <Marquee />
 
       {/* ---------- INSTITUCIONAL ---------- */}
       <section id="sobre" className="relative overflow-hidden py-28 md:py-32">
