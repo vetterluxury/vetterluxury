@@ -4,6 +4,7 @@ import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import SocialLogin from '@/components/SocialLogin';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -14,18 +15,22 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const supabase = createClient();
 
+  const redirectParam = searchParams.get('redirect') || '';
+  const next = redirectParam.startsWith('/') && !redirectParam.startsWith('//') ? redirectParam : '/conta';
+  const oauthFailed = searchParams.get('erro') === 'oauth';
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setLoading(true);
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
     setLoading(false);
 
     if (signInError) {
       setError('E-mail ou senha incorretos.');
       return;
     }
-    router.push(searchParams.get('redirect') || '/conta');
+    router.push(next);
     router.refresh();
   }
 
@@ -35,6 +40,15 @@ function LoginForm() {
         <p className="eyebrow">Minha Conta</p>
         <h1 className="font-heading text-3xl text-marsala-dark mt-3">Entrar</h1>
         <div className="gold-rule" />
+      </div>
+
+      <SocialLogin next={next} />
+      {oauthFailed && <p className="text-sm text-marsala mt-3">Não foi possível entrar com sua conta Google ou Apple. Tente novamente.</p>}
+
+      <div className="flex items-center gap-3 my-7 text-xs text-ink/40 uppercase tracking-widest">
+        <span className="flex-1 h-px bg-marsala-dark/15" />
+        ou
+        <span className="flex-1 h-px bg-marsala-dark/15" />
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -56,7 +70,9 @@ function LoginForm() {
         <Link href="/recuperar-senha" className="text-xs text-marsala-dark underline">Esqueci minha senha</Link>
         <p className="text-sm text-ink/60 mt-2">
           Ainda não tem conta?{' '}
-          <Link href="/cadastro" className="text-marsala underline">Cadastre-se</Link>
+          <Link href={next === '/conta' ? '/cadastro' : `/cadastro?redirect=${encodeURIComponent(next)}`} className="text-marsala underline">
+            Cadastre-se
+          </Link>
         </p>
       </div>
     </div>
