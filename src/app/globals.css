@@ -273,3 +273,68 @@ a.bg-marsala-dark * {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
+/* =========================================
+   FONTE DA MARCA: KARATÓNE
+   Coloque UM destes arquivos na pasta public/fonts/ (o site usa o primeiro que encontrar):
+   karatone.woff2, karatone.woff, karatone.otf ou karatone.ttf
+   Sem o arquivo, o site usa a Playfair Display no lugar (ver tailwind.config.ts).
+   ========================================= */
+
+@font-face {
+  font-family: 'Karatone';
+  src: url('/fonts/karatone.woff2') format('woff2'),
+    url('/fonts/karatone.woff') format('woff'),
+    url('/fonts/karatone.otf') format('opentype'),
+    url('/fonts/karatone.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-brand {
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+}
+
+/* =========================================
+   LETREIRO EM MOVIMENTO (marquee)
+   Velocidade: troque o 60s abaixo (maior = mais lento).
+   ========================================= */
+
+.marquee {
+  --marquee-speed: 60s;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-speed) linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+}
