@@ -1,34 +1,29 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 export default function Newsletter() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
     setStatus('loading');
 
-    // Newsletter é guardada em site_settings como uma lista simples.
-    // Para volume maior, crie uma tabela `newsletter_subscribers` dedicada.
-    const { data } = await supabase.from('site_settings').select('value').eq('key', 'newsletter_emails').single();
-    const current: string[] = Array.isArray(data?.value) ? (data!.value as string[]) : [];
-
-    if (current.includes(email)) {
+    // A inscrição passa pelo servidor (/api/newsletter), assim qualquer visitante consegue se inscrever.
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error('falha');
       setStatus('done');
-      return;
+      setEmail('');
+    } catch {
+      setStatus('error');
     }
-
-    const { error } = await supabase
-      .from('site_settings')
-      .upsert({ key: 'newsletter_emails', value: [...current, email] });
-
-    setStatus(error ? 'error' : 'done');
-    if (!error) setEmail('');
   }
 
   return (
