@@ -1,21 +1,34 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import Link from 'next/link';
 
 export default function RecuperarSenhaPage() {
-  const [email, setEmail] = useState('');
+  const [identificador, setIdentificador] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const supabase = createClient();
+  const [message, setMessage] = useState('');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${siteUrl}/redefinir-senha`,
-    });
-    setStatus(error ? 'error' : 'done');
+    setMessage('');
+    try {
+      const res = await fetch('/api/auth/recuperar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identificador }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setMessage(data.error || 'Não foi possível enviar o e-mail. Tente novamente.');
+        setStatus('error');
+        return;
+      }
+      setStatus('done');
+    } catch {
+      setMessage('Erro de conexão. Tente novamente.');
+      setStatus('error');
+    }
   }
 
   return (
@@ -27,16 +40,30 @@ export default function RecuperarSenhaPage() {
       </div>
 
       {status === 'done' ? (
-        <p className="text-center text-sm text-ink/70">
-          Se este e-mail estiver cadastrado, você receberá um link para redefinir sua senha em instantes.
-        </p>
+        <div className="text-center text-sm text-ink/70 flex flex-col gap-3">
+          <p>
+            Se encontrarmos uma conta com esses dados, enviaremos um link para redefinir a senha no e-mail cadastrado nela.
+          </p>
+          <p>O e-mail pode levar alguns minutos. Confira também a caixa de spam.</p>
+          <Link href="/login" className="text-marsala underline mt-2">Voltar para o login</Link>
+        </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <label className="label-field">
-            E-mail
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="input-field" />
+            E-mail, CPF ou CNPJ
+            <input
+              type="text"
+              required
+              value={identificador}
+              onChange={(e) => setIdentificador(e.target.value)}
+              placeholder="seu@email.com ou CPF/CNPJ"
+              className="input-field"
+            />
+            <span className="text-[0.7rem] text-ink/45 mt-1 block">
+              Por segurança, o link é sempre enviado para o e-mail cadastrado na conta.
+            </span>
           </label>
-          {status === 'error' && <p className="text-sm text-marsala">Não foi possível enviar o e-mail. Tente novamente.</p>}
+          {status === 'error' && <p className="text-sm text-marsala">{message}</p>}
           <button type="submit" disabled={status === 'loading'} className="btn-primary w-full">
             {status === 'loading' ? 'Enviando...' : 'Enviar link de recuperação'}
           </button>
