@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cinzel, Playfair_Display, Cormorant_Garamond, Montserrat } from 'next/font/google';
+import { Cinzel, Playfair_Display, Cormorant_Garamond, Montserrat, Prata } from 'next/font/google';
 import './globals.css';
 import TabAttention from '@/components/TabAttention';
 import Header from '@/components/Header';
@@ -12,6 +12,8 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-cinzel' });
 const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-playfair' });
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500'], variable: '--font-cormorant' });
+// Fonte do título da marca (troque aqui e em tailwind.config.ts para usar outra)
+const prata = Prata({ subsets: ['latin'], weight: '400', variable: '--font-prata' });
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600'], variable: '--font-montserrat' });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${cinzel.variable} ${playfair.variable} ${cormorant.variable} ${montserrat.variable}`}>
+    <html lang="pt-BR" className={`${cinzel.variable} ${playfair.variable} ${cormorant.variable} ${montserrat.variable} ${prata.variable}`}>
       <body className="font-body font-light text-ink bg-champagne">
         <TabAttention />
         <Providers>
