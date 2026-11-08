@@ -42,10 +42,14 @@ export default async function HomePage() {
     <>
       {/* ---------- HERO ---------- */}
       <section
-        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden ${
+        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-[210px] pb-16 ${
           heroDark ? 'bg-marsala-dark' : 'bg-gradient-to-b from-champagne-soft via-champagne to-champagne'
         }`}
       >
+        {/* Letreiro em movimento, logo abaixo do menu */}
+        <div className="absolute left-0 right-0 top-[112px] z-20">
+          <Marquee />
+        </div>
         {HERO_VIDEO ? (
           <HeroVideoBackground src={HERO_VIDEO.src} poster={HERO_VIDEO.poster} />
         ) : heroBanner?.image_url ? (
@@ -90,9 +94,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ---------- LETREIRO EM MOVIMENTO ---------- */}
-      <Marquee />
 
       {/* ---------- INSTITUCIONAL ---------- */}
       <section id="sobre" className="relative overflow-hidden py-28 md:py-32">
