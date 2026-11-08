@@ -28,8 +28,8 @@ const config: Config = {
 
       fontFamily: {
         display: ['var(--font-cormorant)', 'serif'],
-        // Fonte da marca: Karatóne (se o arquivo estiver em public/fonts) ou, enquanto isso, Playfair Display
-        brand: ['Karatone', 'var(--font-playfair)', 'serif'],
+        // Fonte do título da marca (carregada em src/app/layout.tsx)
+        brand: ['var(--font-prata)', 'serif'],
         heading: ['var(--font-playfair)', 'serif'],
         label: ['var(--font-cinzel)', 'serif'],
         body: ['var(--font-montserrat)', 'sans-serif'],
