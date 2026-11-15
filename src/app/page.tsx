@@ -66,10 +66,10 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ---------- HERO / BANNER PRINCIPAL ---------- */}
+      {/* ---------- BANNER PRINCIPAL ---------- */}
 
       <section
-        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-16 pb-16 ${
+        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-[210px] pb-16 ${
           heroDark
             ? 'bg-marsala-dark'
             : 'bg-gradient-to-b from-champagne-soft via-champagne to-champagne'
@@ -156,7 +156,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ---------- LETREIRO EM MOVIMENTO ---------- */}
+      {/* ---------- MARQUEE ABAIXO DO BANNER ---------- */}
 
       <Marquee />
 
@@ -192,14 +192,13 @@ export default async function HomePage() {
 
             <p className="text-[#4a4340] text-[0.96rem] mb-3.5 max-w-md">
               Na Vetter Luxury acreditamos que vestir-se bem começa pela
-              lingerie de luxo. Cada peça de lingerie é cuidadosamente
-              selecionada para proporcionar elegância, conforto,
-              sensualidade e autoestima.
+              lingerie de luxo. Cada peça de lingerie é cuidadosamente selecionada
+              para proporcionar elegância, conforto, sensualidade e autoestima.
             </p>
 
             <p className="text-[#4a4340] text-[0.96rem] max-w-md">
-              Mais do que produtos, entregamos experiências exclusivas
-              para mulheres que valorizam o luxo em cada detalhe.
+              Mais do que produtos, entregamos experiências exclusivas para
+              mulheres que valorizam o luxo em cada detalhe.
             </p>
           </div>
         </div>
