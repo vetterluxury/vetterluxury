@@ -1,29 +1,31 @@
 'use client';
-
+ 
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { whatsappLink } from '@/lib/utils';
-
+ 
 export default function ContactSection() {
   const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
-  const supabase = createClient();
-
+ 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
-
-    const { data } = await supabase.from('site_settings').select('value').eq('key', 'contact_messages').single();
-    const current = Array.isArray(data?.value) ? data!.value : [];
-
-    const { error } = await supabase
-      .from('site_settings')
-      .upsert({ key: 'contact_messages', value: [...current, { ...form, sentAt: new Date().toISOString() }] });
-
-    setStatus(error ? 'error' : 'done');
-    if (!error) setForm({ nome: '', email: '', telefone: '', mensagem: '' });
+ 
+    // O envio passa pelo servidor (/api/contato), assim qualquer visitante consegue enviar a mensagem.
+    try {
+      const res = await fetch('/api/contato', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('falha ao enviar');
+      setStatus('done');
+      setForm({ nome: '', email: '', telefone: '', mensagem: '' });
+    } catch {
+      setStatus('error');
+    }
   }
-
+ 
   return (
     <section id="contato" className="py-24 md:py-28">
       <div className="max-w-5xl mx-auto px-6">
@@ -36,7 +38,7 @@ export default function ContactSection() {
             pedido.
           </p>
         </div>
-
+ 
         <div className="grid md:grid-cols-2 gap-14">
           <div className="flex flex-col gap-6">
             <a
@@ -68,7 +70,7 @@ export default function ContactSection() {
               <span className="text-sm text-marsala-dark group-hover:text-gold transition-colors">@vetterluxury</span>
             </a>
           </div>
-
+ 
           {status === 'done' ? (
             <p className="text-sm text-green-700 self-start">Mensagem enviada! Em breve entraremos em contato.</p>
           ) : (
@@ -103,3 +105,4 @@ export default function ContactSection() {
     </section>
   );
 }
+ 
