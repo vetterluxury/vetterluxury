@@ -66,7 +66,39 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ---------- BANNER PRINCIPAL ---------- */}
+      
+      {/* ---------- BANNER EDITORIAL VETTER LUXURY ---------- */}
+      <section className="relative w-full overflow-hidden bg-[#6A382C]">
+        <div className="relative w-full aspect-[3/2]">
+          <Image
+            src="/banner-vetter-luxury.png"
+            alt="Vetter Luxury — lingerie marsala sobre cetim champanhe"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+
+          {/* Área clicável sobre o botão Conheça a Coleção */}
+          <Link
+            href="/produtos"
+            aria-label="Conheça a coleção Vetter Luxury"
+            className="absolute z-10 left-[6.5%] top-[58%] w-[20%] h-[7%] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+          >
+            <span className="sr-only">Conheça a coleção</span>
+          </Link>
+
+          {/* Área clicável sobre o botão Caixa Misteriosa */}
+          <Link
+            href="/caixa-misteriosa"
+            aria-label="Conheça a Caixa Misteriosa"
+            className="absolute z-10 left-[28.2%] top-[58%] w-[17%] h-[7%] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+          >
+            <span className="sr-only">Caixa Misteriosa</span>
+          </Link>
+        </div>
+      </section>
+
 
       <section
         className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-[210px] pb-16 ${
