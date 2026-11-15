@@ -66,42 +66,9 @@ export default async function HomePage() {
 
   return (
     <>
-      
-      {/* ---------- BANNER EDITORIAL VETTER LUXURY ---------- */}
-      <section className="relative w-full overflow-hidden bg-[#6A382C]">
-        <div className="relative w-full aspect-[3/2]">
-          <Image
-            src="/banner-vetter-luxury.png"
-            alt="Vetter Luxury — lingerie marsala sobre cetim champanhe"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-
-          {/* Área clicável sobre o botão Conheça a Coleção */}
-          <Link
-            href="/produtos"
-            aria-label="Conheça a coleção Vetter Luxury"
-            className="absolute z-10 left-[6.5%] top-[58%] w-[20%] h-[7%] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-          >
-            <span className="sr-only">Conheça a coleção</span>
-          </Link>
-
-          {/* Área clicável sobre o botão Caixa Misteriosa */}
-          <Link
-            href="/caixa-misteriosa"
-            aria-label="Conheça a Caixa Misteriosa"
-            className="absolute z-10 left-[28.2%] top-[58%] w-[17%] h-[7%] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-          >
-            <span className="sr-only">Caixa Misteriosa</span>
-          </Link>
-        </div>
-      </section>
-
-
+      {/* BANNER ORIGINAL */}
       <section
-        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-[210px] pb-16 ${
+        className={`relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-16 pb-16 ${
           heroDark
             ? 'bg-marsala-dark'
             : 'bg-gradient-to-b from-champagne-soft via-champagne to-champagne'
@@ -139,7 +106,6 @@ export default async function HomePage() {
                 backgroundPosition: 'center',
               }}
             />
-
             <CherryScatter variant="hero" />
           </>
         )}
@@ -157,8 +123,7 @@ export default async function HomePage() {
           </p>
 
           <p className="text-[#5c4f47] text-sm max-w-md mx-auto mb-10">
-            Descubra coleções exclusivas criadas para mulheres que desejam
-            sentir-se únicas, confiantes e sofisticadas.
+            Descubra coleções exclusivas criadas para mulheres que desejam sentir-se únicas, confiantes e sofisticadas.
           </p>
 
           <div className="flex gap-5 justify-center flex-wrap">
@@ -177,9 +142,7 @@ export default async function HomePage() {
                   : 'btn-outline border-marsala-dark text-marsala-dark'
               }
               style={
-                heroDark
-                  ? { borderColor: '#F4E8E1' }
-                  : undefined
+                heroDark ? { borderColor: '#F4E8E1' } : undefined
               }
             >
               Caixa Misteriosa
@@ -188,12 +151,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ---------- MARQUEE ABAIXO DO BANNER ---------- */}
-
+      {/* LETREIRO ABAIXO DO BANNER */}
       <Marquee />
 
-      {/* ---------- INSTITUCIONAL ---------- */}
-
+      {/* INSTITUCIONAL */}
       <section
         id="sobre"
         className="relative overflow-hidden py-28 md:py-32"
@@ -223,52 +184,41 @@ export default async function HomePage() {
             <div className="gold-rule !mx-0" />
 
             <p className="text-[#4a4340] text-[0.96rem] mb-3.5 max-w-md">
-              Na Vetter Luxury acreditamos que vestir-se bem começa pela
-              lingerie de luxo. Cada peça de lingerie é cuidadosamente selecionada
+              Na Vetter Luxury acreditamos que vestir-se bem começa pela lingerie de luxo. Cada peça de lingerie é cuidadosamente selecionada
               para proporcionar elegância, conforto, sensualidade e autoestima.
             </p>
 
             <p className="text-[#4a4340] text-[0.96rem] max-w-md">
-              Mais do que produtos, entregamos experiências exclusivas para
-              mulheres que valorizam o luxo em cada detalhe.
+              Mais do que produtos, entregamos experiências exclusivas para mulheres que valorizam o luxo em cada detalhe.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ---------- VÍDEOS ---------- */}
-
+      {/* VÍDEOS */}
       <VideoShowcase />
 
-      {/* ---------- CAIXA MISTERIOSA ---------- */}
-
+      {/* CAIXA MISTERIOSA */}
       <MysteryBox />
 
-      {/* ---------- COLEÇÕES ---------- */}
-
+      {/* COLEÇÕES */}
       <CollectionsShowcase
         collections={collectionList}
         products={showcaseProducts}
       />
 
-      {/* ---------- DIFERENCIAIS ---------- */}
-
+      {/* DIFERENCIAIS */}
       <Differentials />
 
-      {/* ---------- DEPOIMENTOS ---------- */}
-
+      {/* DEPOIMENTOS */}
       <Testimonials testimonials={testimonials} />
 
-      {/* ---------- INSTAGRAM ---------- */}
-
+      {/* INSTAGRAM */}
       <InstagramFeed />
-
-      {/* ---------- NEWSLETTER ---------- */}
 
       <Newsletter />
 
-      {/* ---------- CONTATO ---------- */}
-
+      {/* CONTATO */}
       <ContactSection />
     </>
   );
